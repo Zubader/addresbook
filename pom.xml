@@ -14,9 +14,25 @@
     <cx.version>3.0-SNAPSHOT</cx.version>
     <cx.port>8180</cx.port>
     <cx.router>net.whiteants.Main</cx.router>
+    <orm.connection.url>jdbc:h2:mem:test</orm.connection.url>
+    <orm.connection.usarname>test</orm.connection.usarname>
+    <orm.connection.password>test</orm.connection.password>
+    <orm.deffaultSchema>orm</orm.deffaultSchema>
   </properties>
 
+
+
   <dependencies>
+    <dependency>
+      <groupId>org.json</groupId>
+      <artifactId>json</artifactId>
+      <version>20090211</version>
+    </dependency>
+    <dependency>
+      <groupId>pro.savant.circumflex</groupId>
+      <artifactId>circumflex-orm</artifactId>
+      <version>${cx.version}</version>
+    </dependency>
     <dependency>
       <groupId>pro.savant.circumflex</groupId>
       <artifactId>circumflex-core</artifactId>
@@ -61,6 +77,11 @@
       <artifactId>scalatest_2.10.0</artifactId>
       <version>1.8</version>
       <scope>test</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.h2database</groupId>
+      <artifactId>h2</artifactId>
+      <version>1.3.170</version>
     </dependency>
   </dependencies>
 
