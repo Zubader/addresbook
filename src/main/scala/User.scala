@@ -25,10 +25,7 @@ object User
 
   validation
       .unique(_.email)
-      .pattern(_.email, "([-0-9a-zA-Z.@)")
-
-  val eu = User AS(email)
-
+      .pattern(_.email, "\w+@\w+\.\w+".r.pattern)
 
 }
 
@@ -59,6 +56,6 @@ object Contact
       .unique(_.phoneNumber)
       .notEmpty(_.title)
       .notEmpty(_.address)
-      .pattern(_.phoneNumber, "(\d{2}-(\d{4})-\d{5})")
+      .pattern(_.phoneNumber, "\d{1,3}-\d{3}-\d{3}-\d{4}".r.pattern)
 
 }
