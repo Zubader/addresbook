@@ -56,6 +56,6 @@ object Contact
       .unique(_.phoneNumber)
       .notEmpty(_.title)
       .notEmpty(_.address)
-      .pattern(_.phoneNumber, "\d{1,3}-\d{3}-\d{3}-\d{4}".r.pattern)
+      .pattern(_.phoneNumber, "\d{1,3}-\d{3}-\d{3}-\d{4}".r.pattern (str))
 
 }

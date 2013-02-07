@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e2d4c523-6e63-44df-bf37-5f6e6c405872" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/scala/User.scala" afterPath="$PROJECT_DIR$/src/main/scala/User.scala" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/addressbook.iml" afterPath="$PROJECT_DIR$/addressbook.iml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="addressbook.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -18,7 +16,7 @@
     <file path="/Customer.scala" changelist="e2d4c523-6e63-44df-bf37-5f6e6c405872" time="1360044142903" ignored="false" />
     <file path="/customer.scala" changelist="e2d4c523-6e63-44df-bf37-5f6e6c405872" time="1360050354214" ignored="false" />
     <file path="/cx.properties" changelist="e2d4c523-6e63-44df-bf37-5f6e6c405872" time="1360045705464" ignored="false" />
-    <file path="/User.scala" changelist="e2d4c523-6e63-44df-bf37-5f6e6c405872" time="1360215028866" ignored="false" />
+    <file path="/User.scala" changelist="e2d4c523-6e63-44df-bf37-5f6e6c405872" time="1360216458015" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,7 +78,7 @@
       <file leaf-file-name="User.scala" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/scala/User.scala">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="61" column="51" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.8783784">
+            <state line="58" column="72" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.8108108">
               <folding />
             </state>
           </provider>
@@ -275,6 +273,7 @@
     <property name="MemberChooser.copyJavadoc" value="false" />
     <property name="GoToClass.toSaveIncludeLibraries" value="false" />
     <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="FullScreen" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="GoToClass.includeLibraries" value="false" />
     <property name="dynamic.classpath" value="false" />
@@ -665,7 +664,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/scala/User.scala">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="51" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.8783784">
+        <state line="58" column="72" selection-start="1453" selection-end="1453" vertical-scroll-proportion="0.8108108">
           <folding />
         </state>
       </provider>
