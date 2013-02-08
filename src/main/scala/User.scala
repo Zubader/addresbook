@@ -14,7 +14,7 @@ class User
   val email = "email".TEXT.NOT_NULL.UNIQUE
   val passwordSha256 = "password".TEXT.NOT_NULL
 
-  def contacts = inverseMany(Contact.User)           //обратная связь
+  def contact = inverseMany(Contact.user)           //обратная связь
 }
 
 object User
@@ -25,8 +25,21 @@ object User
 
   validation
       .unique(_.email)
-      .pattern(_.email, "\w+@\w+\.\w+".r.pattern)
+      .pattern(_.email, "\\w+@\\w+\\.\\w+".r.pattern)
 
+
+  val ur = User AS "ur"
+
+  def sort = SELECT(ur.*)
+      .FROM(ur)
+      .ORDER_BY(ur.email ASC)
+
+
+  def findByEmail(e: String): Option[User] =        //поиск по email
+    (this AS "ur").map(ur => SELECT(ur.*)
+        .FROM (ur)
+        .WHERE(ur.email LIKE email)
+        .unique())
 }
 
 class Contact
@@ -52,10 +65,33 @@ object Contact
     extends Contact
     with Table[Long, Contact] {
 
+  val pnUnique = UNIQUE(phoneNumber)
+
   validation
       .unique(_.phoneNumber)
       .notEmpty(_.title)
       .notEmpty(_.address)
-      .pattern(_.phoneNumber, "\d{1,3}-\d{3}-\d{3}-\d{4}".r.pattern (str))
+      .pattern(_.phoneNumber, "\\d{1,3}-\\d{3}-\\d{3}-\\d{4}".r.pattern)
 
+  private val c = Contact AS "c"
+
+  def sort =
+    SELECT(c.*)
+        .FROM(c)
+        .ORDER_BY(c.title ASC)            //сортировка
+        .list()
+
+  def count = {                     //сколько контактов относиться к пользователю
+  val u = User AS "u"
+    SELECT(u.* -> COUNT(c.*))
+        .FROM(c LEFT_JOIN u)
+        .GROUP_BY(u.id)
+        .list()
+  }
+
+  def findByPhone(phone: String): Option[Contact] =
+    SELECT(c.*)
+        .FROM(c)
+        .add(c.phoneNumber EQ phone)
+        .unique()
 }

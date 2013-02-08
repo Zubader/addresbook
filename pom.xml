@@ -14,13 +14,10 @@
     <cx.version>3.0-SNAPSHOT</cx.version>
     <cx.port>8180</cx.port>
     <cx.router>net.whiteants.Main</cx.router>
-    <orm.connection.url>jdbc:h2:mem:test</orm.connection.url>
-    <orm.connection.usarname>test</orm.connection.usarname>
+    <orm.connection.url>jdbc:h2:test</orm.connection.url>
+    <orm.connection.username>test</orm.connection.username>
     <orm.connection.password>test</orm.connection.password>
-    <orm.deffaultSchema>orm</orm.deffaultSchema>
   </properties>
-
-
 
   <dependencies>
     <dependency>
@@ -139,6 +136,11 @@
             </goals>
           </execution>
         </executions>
+        <configuration>
+          <packages>
+            <package>net.whiteants</package>
+          </packages>
+        </configuration>
       </plugin>
       <!-- Surefire testing -->
       <plugin>
