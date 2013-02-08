@@ -1,0 +1,5 @@
+testdb*
+target/*
+*.db
+*.iml
+.idea/
