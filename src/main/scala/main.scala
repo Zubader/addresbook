@@ -12,3 +12,5 @@ class Main extends Router {
   get("/") = ftl("index.ftl")
 
 }
+
+
