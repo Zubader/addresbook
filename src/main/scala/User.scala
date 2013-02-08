@@ -2,6 +2,8 @@ package net.whiteants
 
 import pro.savant.circumflex._, core._, orm._
 
+
+
 class User
     extends Record[Long, User]
     with IdentityGenerator[Long,User] {       //Создание строки User с полем Name
@@ -10,9 +12,10 @@ class User
   def relation = User
 
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT
-  val fullName = "full_name".TEXT
-  val email = "email".TEXT.NOT_NULL.UNIQUE
+  val name = "name".TEXT
+  val email = "email".TEXT.NOT_NULL
   val passwordSha256 = "password".TEXT.NOT_NULL
+  val recordData = "record_data".TIMESTAMP
 
   def contact = inverseMany(Contact.user)           //обратная связь
 }
@@ -28,18 +31,27 @@ object User
       .pattern(_.email, "\\w+@\\w+\\.\\w+".r.pattern)
 
 
-  val ur = User AS "ur"
+  private val u = User AS "u"
 
-  def sort = SELECT(ur.*)
-      .FROM(ur)
-      .ORDER_BY(ur.email ASC)
+  def sort =
+    SELECT(u.*)
+      .FROM(u)
+      .ORDER_BY(u.email ASC)
+      .list()
 
 
-  def findByEmail(e: String): Option[User] =        //поиск по email
-    (this AS "ur").map(ur => SELECT(ur.*)
-        .FROM (ur)
-        .WHERE(ur.email LIKE email)
-        .unique())
+  def findByEmail(email: String, passwordSha256: String) = {
+    SELECT(u.*)
+        .FROM(u)
+        .add(u.email EQ email)
+        .add(u.passwordSha256 EQ passwordSha256)
+        .unique()
+  }
+
+  def userDelete_!(id:Long){
+    u.id:=id
+    u.DELETE_!()
+  }
 }
 
 class Contact
@@ -51,7 +63,7 @@ class Contact
 
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT  //автоопределение id
   val title = "title".TEXT.NOT_NULL
-  val birthday = "birthday".DATE
+  val birthDay = "birthday".TIMESTAMP
   val address = "address".TEXT.NOT_NULL
   val phoneNumber = "phone_number".TEXT.NOT_NULL
   val comments = "comments".TEXT
@@ -71,6 +83,7 @@ object Contact
       .unique(_.phoneNumber)
       .notEmpty(_.title)
       .notEmpty(_.address)
+      .notEmpty(_.phoneNumber)
       .pattern(_.phoneNumber, "\\d{1,3}-\\d{3}-\\d{3}-\\d{4}".r.pattern)
 
   private val c = Contact AS "c"
@@ -89,9 +102,10 @@ object Contact
         .list()
   }
 
-  def findByPhone(phone: String): Option[Contact] =
+  def findByUser(user: User) = {
     SELECT(c.*)
         .FROM(c)
-        .add(c.phoneNumber EQ phone)
-        .unique()
+        .add(c.user IS  user)
+        .list()
+  }
 }
