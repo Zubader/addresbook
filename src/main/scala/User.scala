@@ -17,7 +17,7 @@ class User
   val passwordSha256 = "passwordSha256".TEXT.NOT_NULL
   val registrationDate = "registration_date".TIMESTAMP.NOT_NULL(new Date)
 
-  def contact = inverseMany(Contact.user)       //обратная связь
+  def book = inverseMany(Book.user)       //обратная связь
 }
 
 object User

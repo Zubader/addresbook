@@ -38,7 +38,7 @@ object Book
   private val b = Book AS "b"
 
   def sort =
-    SELECT(c.*)
+    SELECT(b.*)
         .FROM(b)
         .ORDER_BY(b.title ASC)            //сортировка
         .list()
