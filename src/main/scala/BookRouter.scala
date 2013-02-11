@@ -6,7 +6,7 @@ import pro.savant.circumflex._, core._, web._, freemarker._
 class BookRouter extends Router {
   //новая книга
   get("/") = {
-    val contacts = Book.findByUser(User)
+    'contacts := Book.findByUser(User)
     ftl("/addressbook/list.ftl")
   }
   //создание книги
@@ -27,8 +27,8 @@ class BookRouter extends Router {
         flash.update("error", e.errors)
         sendRedirect("/book/~new.ftl")
     }
-    //новая адресная книга создана
-    flash.update("msg", msg.fmt("user.addressbook"))
+    //новая адресная книга добавлена
+    flash.update("msg", msg.fmt("user.add.book"))
     sendRedirect("/book")
   }
 }
