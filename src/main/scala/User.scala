@@ -17,7 +17,7 @@ class User
   val passwordSha256 = "password".TEXT.NOT_NULL
   val recordData = "record_data".TIMESTAMP
 
-  def contact = inverseMany(Contact.user)
+  def contact = inverseMany(Contact.user)       //обратная связь
 }
 
 object User
@@ -46,10 +46,5 @@ object User
         .add(u.email EQ email)
         .add(u.passwordSha256 EQ passwordSha256)
         .unique()
-  }
-
-  def userDelete_!(id:Long){
-    u.id:=id
-    u.DELETE_!()
   }
 }
