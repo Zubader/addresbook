@@ -12,7 +12,7 @@ class Book
 
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT  //автоопределение id
   val title = "title".TEXT.NOT_NULL
-  val birthDay = "birth_day".TIMESTAMP
+  val birthDate = "birth_date".TIMESTAMP
   val address = "address".TEXT.NOT_NULL
   val phoneNumber = "phone_number".TEXT.NOT_NULL
   val comments = "comments".TEXT

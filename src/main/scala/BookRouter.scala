@@ -14,11 +14,11 @@ class BookRouter extends Router {
     try {
       val b = new Book
 
-      b.title := param("title")
-      b.address := param("address")
-      b.phoneNumber := param("phone_number")
-      b.birthDay := param("birth_day")
-      b.comments := param("comments")
+      b.title := param("t")
+      b.address := param("a")
+      b.phoneNumber := param("p")
+      b.birthDate := param("d")
+      b.comments := param("c")
 
       b.user := currentUser
       b.save()
