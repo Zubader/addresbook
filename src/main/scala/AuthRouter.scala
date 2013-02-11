@@ -18,20 +18,43 @@ class AuthRouter extends Router {
     val email = param("email")
     val password = param("passwordSha246")
     val user = User.findByEmail(email, password)
-    if (User.isEmpty) {
+    if (user.isEmpty) {
       //не удачно
-      flash.update("msg", msg.fmt(user.login.failed) )
+      flash.update("msg", msg.fmt("user.login.failed") )
       sendRedirect("/auth/login")
     } else {
       //удачно
-      flash.update("msg", msq.fmt(user.login.managed))
+      flash.update("msg", msq.fmt("user.login.managed"))
       request.session.update("principal")
       sendRedirect("/")
     }
   }
   //блок выхода
-  get("logout") = {
+  get("/logout") = {
     request.session.remove("principal")
+    sendRedirect("/")
+  }
+
+  //зарегистрироваться
+  get("/signup") = ftl("/auth/signup.ftl")
+
+  post("signup") = {
+    try {
+      val u = new User
+
+      u.email := param("email")
+      u.name := param("name")
+      u.passwordSha256 := pro.savant.core.sha256("passwordSha256")
+
+      u.save()
+    } catch {
+      //условия исключения
+      case e: ValidationException =>
+        flash.update("errors", e.errors)
+        sendRedirect("/auth/signup.ftl")
+    }
+    //новый пользователь добавлен
+    flash.update("msg", msg.fmt("user.new.added"))
     sendRedirect("/")
   }
 }

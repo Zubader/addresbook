@@ -14,7 +14,7 @@ class User
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT
   val name = "name".TEXT
   val email = "email".TEXT.NOT_NULL
-  val passwordSha256 = "password".TEXT.NOT_NULL
+  val passwordSha256 = "passwordSha256".TEXT.NOT_NULL
   val recordData = "record_data".TIMESTAMP
 
   def contact = inverseMany(Contact.user)       //обратная связь
