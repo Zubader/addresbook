@@ -1,7 +1,7 @@
 package net.whiteants
 
 import pro.savant.circumflex._, core._, orm._
-
+import java.util.Date
 
 
 class User
@@ -15,7 +15,7 @@ class User
   val name = "name".TEXT
   val email = "email".TEXT.NOT_NULL
   val passwordSha256 = "passwordSha256".TEXT.NOT_NULL
-  val recordData = "record_data".TIMESTAMP
+  val registrationDate = "registration_date".TIMESTAMP.NOT_NULL(new Date)
 
   def contact = inverseMany(Contact.user)       //обратная связь
 }

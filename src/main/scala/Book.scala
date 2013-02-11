@@ -3,17 +3,16 @@ package net.whiteants
 import pro.savant.circumflex._, core._, orm._
 
 
-
-class Contact
-    extends Record[Long, Contact]
-    with IdentityGenerator[Long, Contact] {
+class Book
+    extends Record[Long, Book]
+    with IdentityGenerator[Long, Book] {
 
   def PRIMARY_KEY = id
-  def relation = Contact
+  def relation = Book
 
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT  //автоопределение id
   val title = "title".TEXT.NOT_NULL
-  val birthDay = "birthday".TIMESTAMP
+  val birthDay = "birth_day".TIMESTAMP
   val address = "address".TEXT.NOT_NULL
   val phoneNumber = "phone_number".TEXT.NOT_NULL
   val comments = "comments".TEXT
@@ -23,9 +22,9 @@ class Contact
       .ON_UPDATE(CASCADE)
 }
 
-object Contact
-    extends Contact
-    with Table[Long, Contact] {
+object Book
+    extends Book
+    with Table[Long, Book] {
 
   val pnUnique = UNIQUE(phoneNumber)
 
@@ -36,26 +35,26 @@ object Contact
       .notEmpty(_.phoneNumber)
       .pattern(_.phoneNumber, "\\d{1,3}-\\d{3}-\\d{3}-\\d{4}".r.pattern)
 
-  private val c = Contact AS "c"
+  private val b = Book AS "b"
 
   def sort =
     SELECT(c.*)
-        .FROM(c)
-        .ORDER_BY(c.title ASC)            //сортировка
+        .FROM(b)
+        .ORDER_BY(b.title ASC)            //сортировка
         .list()
 
   def count = {                     //сколько контактов относиться к пользователю
   val u = User AS "u"
-    SELECT(u.* -> COUNT(c.*))
-        .FROM(c LEFT_JOIN u)
+    SELECT(u.* -> COUNT(b.*))
+        .FROM(b LEFT_JOIN u)
         .GROUP_BY(u.id)
         .list()
   }
 
   def findByUser(user: User) = {
-    SELECT(c.*)
-        .FROM(c)
-        .add(c.user IS  user)
+    SELECT(b.*)
+        .FROM(b)
+        .add(b.user IS  user)
         .list()
   }
 }

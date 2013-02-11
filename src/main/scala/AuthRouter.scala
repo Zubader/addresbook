@@ -1,50 +1,41 @@
 package net.whiteants
 
-/**
- * Created with IntelliJ IDEA.
- * User: zubader
- * Date: 2/11/13
- * Time: 9:08 AM
- * To change this template use File | Settings | File Templates.
- */
+import pro.savant.circumflex._, core._, web._, freemarker._
 
-import pro.savant.circumflex._, core._, web._
 
 class AuthRouter extends Router {
   //блок входа
   get("/login") = ftl("/auth/login.ftl")
 
   post("/login") = {
-    val email = param("email")
-    val password = param("passwordSha246")
-    val user = User.findByEmail(email, password)
-    if (user.isEmpty) {
+    val email = param("e")
+    val password = sha256(param("p"))
+    val user = User.findByEmail(email, password).getOrElse {
       //не удачно
       flash.update("msg", msg.fmt("user.login.failed") )
       sendRedirect("/auth/login")
-    } else {
-      //удачно
-      flash.update("msg", msq.fmt("user.login.managed"))
-      request.session.update("principal")
-      sendRedirect("/")
     }
+    //удачно
+    flash.update("msg", msg.fmt("user.login.managed"))
+    session.update("principal", user)
+    sendRedirect("/")
   }
   //блок выхода
   get("/logout") = {
-    request.session.remove("principal")
+    session.remove("principal")
     sendRedirect("/")
   }
 
   //зарегистрироваться
   get("/signup") = ftl("/auth/signup.ftl")
 
-  post("signup") = {
+  post("/signup") = {
     try {
       val u = new User
 
-      u.email := param("email")
-      u.name := param("name")
-      u.passwordSha256 := pro.savant.core.sha256("passwordSha256")
+      u.email := param("e")
+      u.name := param("n")
+      u.passwordSha256 := sha256(param("p"))
 
       u.save()
     } catch {
@@ -54,7 +45,7 @@ class AuthRouter extends Router {
         sendRedirect("/auth/signup.ftl")
     }
     //новый пользователь добавлен
-    flash.update("msg", msg.fmt("user.new.added"))
+    flash.update("msg", msg.fmt("user.registered"))
     sendRedirect("/")
   }
 }
