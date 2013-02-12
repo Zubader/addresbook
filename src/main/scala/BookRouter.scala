@@ -1,6 +1,7 @@
 package net.whiteants
 
 import pro.savant.circumflex._, core._, web._, freemarker._
+import java.util.GregorianCalendar
 
 
 class BookRouter extends Router {
@@ -26,6 +27,7 @@ class BookRouter extends Router {
       b.address := param("a")
       b.phoneNumber := param("p")
       b.comments := param("c")
+      b.birthDate := new GregorianCalendar(param("y").toInt,param("m").toInt,param("d").toInt).getTime
 
       b.user := currentUser
       b.save()
@@ -62,6 +64,7 @@ class BookRouter extends Router {
         contact.address := param("a")
         contact.phoneNumber := param("p")
         contact.comments := param("c")
+        contact.birthDate := new GregorianCalendar(param("y").toInt,param("m").toInt,param("d").toInt).getTime
 
         contact.save()
       } catch {

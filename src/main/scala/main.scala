@@ -1,6 +1,6 @@
 package net.whiteants
 
-import pro.savant.circumflex._, core._, web._, freemarker._
+import pro.savant.circumflex._, core._, web._
 import java.util.Date
 
 
