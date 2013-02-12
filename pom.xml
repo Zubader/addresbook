@@ -11,6 +11,7 @@
   <name>Simple Circumflex Application</name>
 
   <properties>
+    <cx.messages.name>msg</cx.messages.name>
     <cx.version>3.0-SNAPSHOT</cx.version>
     <cx.port>8180</cx.port>
     <cx.router>net.whiteants.Main</cx.router>

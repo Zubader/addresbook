@@ -1,6 +1,6 @@
 package net.whiteants
 
-import pro.savant.circumflex._, core._, orm._
+import pro.savant.circumflex._, orm._
 import java.util.Date
 
 
