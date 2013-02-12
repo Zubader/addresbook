@@ -9,8 +9,10 @@ class Main extends Router {
 
   'currentDate := new Date
 
-  get("/test") = "I'm fine, thanks!"
-  get("/") = ftl("index.ftl")
+  sub("/auth") = new AuthRouter
+
+  rewrite("/") = prefix + "/book"             //вложеие моршрута в друг друга
+  sub("/book") = new BookRouter
 
 }
 

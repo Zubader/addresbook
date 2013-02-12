@@ -43,8 +43,8 @@ class BookRouter extends Router {
   get("/~new") = ftl("/addressbook/new.ftl")
   get("/error") = ftl("/error/error.ftl")
   sub("/:id") = {                                                   //передача прификса слудующим за ним get/post
-    val contact =
-      Book.get(param("id").toLong).getOrElse(sendError(404))
+  val contact =
+    Book.get(param("id").toLong).getOrElse(sendError(404))
     'contact := contact
 
     if (contact.user() != currentUser)
