@@ -20,6 +20,7 @@ class AuthRouter extends Router {
     session.update("principal", user)
     sendRedirect("/")
   }
+
   //блок выхода
   get("/logout") = {
     session.remove("principal")
@@ -42,7 +43,7 @@ class AuthRouter extends Router {
       //условия исключения
       case e: ValidationException =>
         flash.update("errors", e.errors)
-        sendRedirect("/auth/signup.ftl")
+        sendRedirect("/auth/signup")
     }
     //новый пользователь добавлен
     flash.update("msg", msg.fmt("user.registered"))

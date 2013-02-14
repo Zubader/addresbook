@@ -11,8 +11,8 @@ class Main extends Router {
 
   sub("/auth") = new AuthRouter
 
-  rewrite("/") = prefix + "/book"             //вложеие моршрута в друг друга
-  sub("/book") = new BookRouter
+  rewrite("/") = prefix + "/contacts"             //вложеие моршрута в друг друга
+  sub("/contacts") = new ContactsRouter
 
 }
 

@@ -8,7 +8,8 @@
           type="text/css"
           media="screen"
           href="/css/main.css"/>
-    <title>Simple Circumflex Application</title>
+    ${styles!}
+    <title>Address book Application</title>
   </head>
   <body>
     <div id="header">
@@ -18,7 +19,7 @@
         ${content}
       </div>
       <div id="footer">
-        <span class="copyright">2008-${currentDate?string("yyyy")}</span> ©
+        <span class="copyright">2013-${currentDate?string("yyyy")}</span> ©
         <a class="home" href="http://${(headers['Host'])!"localhost"}">
           ${(headers['Host'])!"localhost"}
         </a>

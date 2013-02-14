@@ -3,12 +3,12 @@ package net.whiteants
 import pro.savant.circumflex._, orm._
 
 
-class Book
-    extends Record[Long, Book]
-    with IdentityGenerator[Long, Book] {
+class Contacts
+    extends Record[Long, Contacts]
+    with IdentityGenerator[Long, Contacts] {
 
   def PRIMARY_KEY = id
-  def relation = Book
+  def relation = Contacts
 
   val id = "id".BIGINT.NOT_NULL.AUTO_INCREMENT  //автоопределение id
   val title = "title".TEXT.NOT_NULL
@@ -22,9 +22,9 @@ class Book
       .ON_UPDATE(CASCADE)
 }
 
-object Book
-    extends Book
-    with Table[Long, Book] {
+object Contacts
+    extends Contacts
+    with Table[Long, Contacts] {
 
   val pnUnique = UNIQUE(phoneNumber)
 
@@ -35,26 +35,26 @@ object Book
       .notEmpty(_.phoneNumber)
       .pattern(_.phoneNumber, "\\d{1,3}-\\d{3}-\\d{3}-\\d{4}".r.pattern)
 
-  private val b = Book AS "b"
+  private val cs = Contacts AS "b"
 
   def sort =
-    SELECT(b.*)
-        .FROM(b)
-        .ORDER_BY(b.title ASC)            //сортировка
+    SELECT(cs.*)
+        .FROM(cs)
+        .ORDER_BY(cs.title ASC)            //сортировка
         .list()
 
   def count = {                     //сколько контактов относиться к пользователю
   val u = User AS "u"
-    SELECT(u.* -> COUNT(b.*))
-        .FROM(b LEFT_JOIN u)
+    SELECT(u.* -> COUNT(cs.*))
+        .FROM(cs LEFT_JOIN u)
         .GROUP_BY(u.id)
         .list()
   }
 
   def findByUser(user: User) = {
-    SELECT(b.*)
-        .FROM(b)
-        .add(b.user IS  user)
+    SELECT(cs.*)
+        .FROM(cs)
+        .add(cs.user IS  user)
         .list()
   }
 }
