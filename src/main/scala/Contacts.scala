@@ -35,7 +35,7 @@ object Contacts
       .notEmpty(_.phoneNumber)
       .pattern(_.phoneNumber, "\\d{1,3}-\\d{3}-\\d{3}-\\d{4}".r.pattern)
 
-  private val cs = Contacts AS "b"
+  private val cs = Contacts AS "cs"
 
   def sort =
     SELECT(cs.*)
