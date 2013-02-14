@@ -56,4 +56,4 @@
   We hope you'll get a lot of fun developing with Circumflex! Good luck!</p>
 [/#assign]
 
-[#include "/layout.ftl"/]
+[#include "layout.ftl"/]

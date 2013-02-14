@@ -62,6 +62,7 @@ class ContactsRouter extends Router {
       try {
 
         contact.title := param("t")
+
         contact.address := param("a")
         contact.phoneNumber := param("p")
         contact.comments := param("c")
@@ -71,7 +72,7 @@ class ContactsRouter extends Router {
       } catch {
         case e: ValidationException =>
           flash.update("error", e.errors)
-          sendRedirect("/contacts/~edit")
+          sendRedirect("/addressbook/~edit")
       }
       flash.update("msg", msg.fmt("user.contact.edit"))
       sendRedirect("/contacts")

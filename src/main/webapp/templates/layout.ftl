@@ -8,7 +8,6 @@
           type="text/css"
           media="screen"
           href="/css/main.css"/>
-    ${styles!}
     <title>Address book Application</title>
   </head>
   <body>
