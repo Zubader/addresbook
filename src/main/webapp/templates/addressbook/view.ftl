@@ -50,7 +50,7 @@
   </form>
 </div>
 <a class="btn" href="/contacts">
-  ${msg['user.button.blaack']}
+  ${msg['user.button.back']}
 </a>
 [/#assign]
 
